@@ -87,6 +87,7 @@
         const handleSubmit =async (e)=>{
             e.preventDefault()
             const [name,description,brand,imageUrl,price] = document.getElementById("m3d8")
+            console.log(name,description,brand,imageUrl,price)
 
             let myObject= {
                 name:name.value,             
@@ -95,11 +96,11 @@
                 imageUrl:imageUrl.value,             
                 price:price.value                                                             
             }
-            
+            toPost(myObject)
         }
 
         
-        const toPost = async ()=> { 
+        const toPost = async (myObject)=> { 
 
 
             try {
@@ -112,16 +113,21 @@
             },
 
             })
-            //  const data = await response.json()   
-            //  return data
+            if (response.ok) {
+                    const data = await response.json()
+                    console.log(data)
+                    alert("Success! The event was successfully created.")
+                } else {
+                    alert("Something went wrong. Please try again later")
+                }
+            
 
             } catch (error) {
                 console.log(error)
             }
         }
 
-        toPost()
-
+      
 
 
 
