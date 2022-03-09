@@ -6,7 +6,7 @@
           
             You are building the new Amazon.
             This time you are also responsible for the back office.
-            THIS is you CRUD endpoint
+            THIS is your CRUD endpoint
             https://striveschool-api.herokuapp.com/api/product/
             The product model is 
             {
@@ -40,8 +40,92 @@
                 "password":"pass"
             }   
         -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
 </head>
 
-<body></body>
+<body>
+
+    <div class="container">
+
+        <form onsubmit="handleSubmit(event)" id="m3d8">
+    
+            <div class="form-group">
+              <label for="inputName">Name</label>
+              <input type="text" class="form-control" id="inputName" required aria-describedby="inputName">
+             
+            </div>
+            <div class="form-group">
+              <label for="inputDescription">Description</label>
+              <input type="text" class="form-control" id="inputDescription" aria-describedby="descriptionHelp">
+          
+            </div>
+            <div class="form-group">
+              <label for="inputBrand">Brand</label>
+              <input type="text" class="form-control" id="inputBrand"required aria-describedby="brandHelp">
+          
+            </div>
+            <div class="form-group">
+              <label for="inputImage">Image</label>
+              <input type="text" class="form-control" id="inputImage" aria-describedby="imgHelp">
+          
+            </div>
+            <div class="form-group">
+              <label for="inputPrice">Price</label>
+              <input type="number" class="form-control" id="inputPrice" aria-describedby="priceHelp">
+          
+            </div>
+          
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+    </div>
+
+
+
+    <script>
+
+        const handleSubmit =async (e)=>{
+            e.preventDefault()
+            const [name,description,brand,imageUrl,price] = document.getElementById("m3d8")
+
+            let myObject= {
+                name:name.value,             
+                description:description.value,             
+                brand:brand.value,             
+                imageUrl:imageUrl.value,             
+                price:price.value                                                             
+            }
+            
+        }
+
+        
+        const toPost = async ()=> { 
+
+
+            try {
+            const response = await fetch("https://striveschool-api.herokuapp.com/api/product/", {
+            method:"POST",
+            body: JSON.stringify(myObject),
+            headers: {
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjA1MTBjOWRhNDBjOTAwMTVmYzhkNmEiLCJpYXQiOjE2NDY4MzA4ODUsImV4cCI6MTY0ODA0MDQ4NX0.neLRXyKa5PRoPDvmTjfltkJkFoj16fZL7ZiL3XAM5yw"
+            ,'Content-Type': 'application/json'
+            },
+
+            })
+            //  const data = await response.json()   
+            //  return data
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        toPost()
+
+
+
+
+    </script>
+</body>
 
 </html>
